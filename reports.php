@@ -1,7 +1,11 @@
 <?php
  include 'db_connect.php'; 
- $d1 = (isset($_GET['d1']) ? date("Y-m-d",strtotime($_GET['d1'])) : date("Y-m-d")) ;
- $d2 = (isset($_GET['d2']) ? date("Y-m-d",strtotime($_GET['d2'])) : date("Y-m-d")) ;
+ $d1 = (isset($_GET['d1']) ? date("Y-m-d", strtotime($_GET['d1'])) : date("Y-m-d"));
+$d2 = (isset($_GET['d2']) ? date("Y-m-d", strtotime($_GET['d2'])) : date("Y-m-d"));
+
+$d1 = date("Y-m-d", strtotime(filter_var($d1, FILTER_SANITIZE_STRING)));
+$d2 = date("Y-m-d", strtotime(filter_var($d2, FILTER_SANITIZE_STRING)));
+
  $data = $d1 == $d2 ? $d1 : $d1. ' - ' . $d2;
  ?>
 <div class="container-fluid">
