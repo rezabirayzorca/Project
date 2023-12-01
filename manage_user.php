@@ -1,7 +1,10 @@
 <?php 
 include('db_connect.php');
 if(isset($_GET['id'])){
-$user = $conn->query("SELECT * FROM users where id =".$_GET['id']);
+	$sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'name';
+	$sortOrder = isset($_GET['order']) && strtoupper($_GET['order']) === 'ASC' ? 'ASC' : 'DESC';
+	
+	$users = $conn->query("SELECT * FROM users ORDER BY $sortColumn $sortOrder");
 foreach($user->fetch_array() as $k =>$v){
 	$meta[$k] = $v;
 }
